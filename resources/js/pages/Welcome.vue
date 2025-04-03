@@ -1,12 +1,11 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
 import axios from 'axios';
 import { initFlowbite, Modal } from 'flowbite';
 import { onMounted, ref } from 'vue';
 
 const games = defineProps(['scheduled_games', 'in_progress_games']);
 
-const carton = ref();
+const carton = ref(null);
 
 const step1 = ref(true);
 const step2 = ref(false);
@@ -86,6 +85,7 @@ const generarCarton = (number = null) => {
             .catch(handleError);
         loading.value = false;
     } catch (error) {
+        loading.value = false;
         handleError(error);
     }
 };
@@ -166,6 +166,11 @@ const amountCard = ref(null);
 const selectGame = (game) => {
     selected_game.value = game.id;
     amountCard.value = game.price_per_card;
+    viewCarton.value = false;
+    carton.value = null;
+    serialNumber.value = null;
+    cardNumbers.value = [];
+    markedNumbers.value = [];
 };
 
 const cleanData = () => {
@@ -263,9 +268,9 @@ onMounted(() => {
                         <ul class="nav">
                             <li><a href="#testimonios">Testimonios</a></li>
                             <li><a href="#" @click="openModal">Comprar</a></li>
-                            <li><a href="/login">Descargar</a></li>
+                            <li><a href="#" title="Pronto">Descargar</a></li>
                             <li><a href="https://wa.link/u181s7" target="_blank">Ayuda</a></li>
-                            <li v-if="$page.props.auth.user">
+                            <!--  <li v-if="$page.props.auth.user">
                                 <Link :href="route('dashboard')">{{ $page.props.auth.user.name }} </Link>
                             </li>
                             <div v-else>
@@ -275,7 +280,7 @@ onMounted(() => {
                                 <li>
                                     <Link :href="route('register')"> Registrarse </Link>
                                 </li>
-                            </div>
+                            </div> -->
                         </ul>
                         <a class="menu-trigger">
                             <span>Menu</span>
@@ -388,11 +393,11 @@ onMounted(() => {
             <div class="row">
                 <div class="col-lg-12">
                     <p>
-                        Copyright © 2025 <a href="#"><b>Bingo Full Gaming</b></a
-                        >. Todos los derechos reservados.
+                        Copyright © 2025 <b>Bingo Full Gaming</b>. <br />
+                        Todos los derechos reservados.
 
-                        <br />Desarrollado por:
-                        <a href="#" target="_blank" title="Quantlas">Quantlas</a>
+                        <br />Powered by:
+                        <a href="https://quantlas.tech" target="_blank" title="Quantlas"><b>Quantlas.tech</b></a>
                     </p>
                 </div>
             </div>
@@ -743,21 +748,21 @@ onMounted(() => {
                         type="button"
                         class="ms-3 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-blue-700 dark:focus:ring-gray-700"
                         :class="
-                            (step2 && carton === undefined) ||
+                            (step2 && carton === null) ||
                             (step2 && name === '') ||
                             (step2 && email === '') ||
                             (step2 && phone === '') ||
-                            (step1 && selected_game === '')
+                            (step1 && selected_game === null)
                                 ? 'cursor-pointer'
                                 : 'cursor-not-allowed'
                         "
                         :hidden="step4 || step5"
                         :disabled="
-                            (step2 && carton === undefined) ||
+                            (step1 && selected_game === null) ||
+                            (step2 && carton === null) ||
                             (step3 && name === '') ||
                             (step3 && email === '') ||
-                            (step3 && phone === '') ||
-                            (step1 && selected_game === '')
+                            (step3 && phone === '')
                         "
                         @click="changeStep(step1 ? 2 : step2 ? 3 : 1 || step3 ? 4 : null || step4 ? 5 : null)"
                     >
