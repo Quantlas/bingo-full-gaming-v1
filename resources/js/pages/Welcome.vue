@@ -13,6 +13,12 @@ const step3 = ref(false);
 const step4 = ref(false);
 const step5 = ref(false);
 
+const whatsapp = ref(false);
+
+const chatWhatsapp = () => {
+    whatsapp.value = !whatsapp.value;
+};
+
 const changeStep = (step) => {
     step1.value = step == 1 ? true : false;
     step2.value = step == 2 ? true : false;
@@ -362,7 +368,7 @@ onMounted(() => {
                                                 <li class="mt-2">
                                                     <i style="color: #f13d06" class="fa-solid fa-circle-check"></i>
                                                     Tenemos meses jugando por lo que
-                                                    <strong><a href="testimonios/index.htm">tenemos varios testimonios de ganadores</a></strong
+                                                    <strong><a href="#">tenemos varios testimonios de ganadores</a></strong
                                                     >.
                                                 </li>
                                                 <li class="mt-2">
@@ -791,6 +797,51 @@ onMounted(() => {
                 </div>
             </div>
         </div>
+    </div>
+    <div v-if="whatsapp" id="whatsapp-chat" class="hide-wsp">
+        <div class="header-chat">
+            <div class="head-home">
+                <div class="info-avatar">
+                    <img src="images/logo.webp" />
+                </div>
+            </div>
+
+            <div class="get-new">
+                <div id="get-nama">Bingo Full Gaming</div>
+                <div id="get-label">El Mejor Bingo Online de Venezuela</div>
+            </div>
+        </div>
+
+        <div class="start-chat">
+            <div class="first-msg">
+                <span>
+                    ¡Hola! somos <b>Bingo Full Gaming</b>.
+                    <br />
+                    <br />
+                    Envía un mensaje y serás atendido brevemente.
+                </span>
+            </div>
+
+            <div class="blanter-msg">
+                <a href="https://wa.link/u181s7" target="_blank" id="send-it"
+                    >Abrir Chat <span class="iconify" data-icon="mdi:paper-airplane" style="color: white"></span
+                ></a>
+            </div>
+        </div>
+        <div id="get-number"></div>
+        <a class="close-chat" @click="chatWhatsapp" href="#">×</a>
+    </div>
+    <a href="#" class="button-float" @click="chatWhatsapp" title="¿Necesitas ayuda?" style="margin-right: 5%">
+        <i class="fa-brands fa-whatsapp" style="font-size: 2.7rem; display: flex; align-items: center; height: 100%; justify-content: center"></i>
+    </a>
+    <div class="button-hide">
+        <div class="button-float-push">
+            <strong>1</strong>
+        </div>
+    </div>
+
+    <div class="button-hide2">
+        <div class="button-float-msg">¿Necesitas Ayuda?</div>
     </div>
 </template>
 <style scoped>
