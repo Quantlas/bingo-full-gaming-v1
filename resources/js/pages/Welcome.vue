@@ -261,7 +261,7 @@ onMounted(() => {
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
                         <a href="/" class="logo">
-                            <img src="images/logo.png" alt="" />
+                            <img src="images/logo.webp" alt="" />
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->

@@ -13,5 +13,5 @@ defineProps<Props>();
 </script>
 
 <template>
-    <img src="/images/logo.png" alt="Bingo Full Gaming" />
+    <img src="/images/logo.webp" alt="Bingo Full Gaming" />
 </template>
