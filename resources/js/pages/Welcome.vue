@@ -346,8 +346,8 @@ onMounted(() => {
                                         </div>
                                         <div class="col-lg-4">
                                             <iframe
-                                                width="560"
-                                                height="315"
+                                                width="100%"
+                                                height="100%"
                                                 src="https://www.youtube.com/embed/65DDs-XubUw?si=pcwr0vDLs4ed8xlh&amp;controls=0"
                                                 title="YouTube video player"
                                                 frameborder="0"
@@ -359,9 +359,9 @@ onMounted(() => {
                                         </div>
                                         <div class="col-lg-4">
                                             <iframe
-                                                width="560"
-                                                height="315"
-                                                src="https://youtube.com/shorts/NtLefMCsiX0?si=Yn-OP0wN2iPH2S8P&amp;controls=0"
+                                                width="100%"
+                                                height="100%"
+                                                src="https://www.youtube.com/embed/65DDs-XubUw?si=pcwr0vDLs4ed8xlh&amp;controls=0"
                                                 title="YouTube video player"
                                                 frameborder="0"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -371,12 +371,19 @@ onMounted(() => {
                                             <!-- <img src="images/details-02.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px" /> -->
                                         </div>
                                         <div class="col-lg-4">
-                                            <video style="border-radius: 23px; margin-bottom: 30px">
-                                                <source src="https://www.youtube.com/shorts/C1zqxXXLzWo" type="video/mp4" />
-                                            </video>
+                                            <iframe
+                                                width="100%"
+                                                height="100%"
+                                                src="https://www.youtube.com/embed/65DDs-XubUw?si=pcwr0vDLs4ed8xlh&amp;controls=0"
+                                                title="YouTube video player"
+                                                frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                referrerpolicy="strict-origin-when-cross-origin"
+                                                allowfullscreen
+                                            ></iframe>
                                             <!-- <img src="images/details-03.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px" /> -->
                                         </div>
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-12 mt-8">
                                             <ol>
                                                 <li>
                                                     <i style="color: #f13d06" class="fa-solid fa-circle-check"></i>
