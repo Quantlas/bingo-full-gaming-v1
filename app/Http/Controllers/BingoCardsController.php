@@ -98,10 +98,8 @@ class BingoCardsController extends Controller
                 // Enviar email de bienvenida
             }
 
-            //$card = $this->aplicarMarcaDeAgua($request['carton']['origin'], $request['carton']['codeMark'], $request['carton']['number'], 'P');
-
             $card = Cards::create([
-                'card_path' => json_encode($request['carton']['filename']),
+                'card_path' => $request['carton']['filename'],
                 'serial_number' => $request['carton']['serial'],
                 'user_id' => $user->id,
                 'game_id' => $request['carton']['game_id']
