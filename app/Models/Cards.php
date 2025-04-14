@@ -13,7 +13,7 @@ class Cards extends Model
         'game_id',
         'user_id',
         'serial_number',
-        'numbers',
+        'card_path',
         'status',
         'created_at',
         'updated_at',

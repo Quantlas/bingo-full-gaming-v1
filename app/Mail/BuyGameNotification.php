@@ -4,9 +4,7 @@ namespace App\Mail;
 
 use App\Models\Games;
 use App\Models\Payment;
-use App\Services\BingoCardGenerator;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
@@ -18,18 +16,29 @@ class BuyGameNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $numbers;
     public $serial_number;
     public $user;
+    public $card_path;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($numbers, $serial_number, $user)
+    public function __construct($serial_number, $user, $card_filename)
     {
-        $this->numbers = $numbers;
         $this->serial_number = $serial_number;
         $this->user = $user;
+        $this->card_path = public_path('images/pendding-cards/' . $card_filename);
+    }
+
+
+    /**
+     * Descargar imagen remota a temporal si es una URL
+     */
+    protected function downloadRemoteImage($url)
+    {
+        $tempPath = tempnam(sys_get_temp_dir(), 'bingo_card') . '.webp';
+        file_put_contents($tempPath, file_get_contents($url));
+        return $tempPath;
     }
 
     /**
@@ -37,27 +46,14 @@ class BuyGameNotification extends Mailable
      */
     public function envelope(): Envelope
     {
-        // Generar la imagen del cartón
-        $generator = new BingoCardGenerator();
-        $image = $generator->generateCardImage(
-            $this->numbers,
-            $this->serial_number
-        );
-
-        // Guardar temporalmente la imagen
-        $imagePath = storage_path('app/public/cards/' . $this->serial_number . '.png');
-        $image->save($imagePath);
-
         return new Envelope(
             from: new Address(
-                config('mail.from.address'), // Email
-                'Bingo Full Gaming' // Nombre que quieres mostrar
+                config('mail.from.address'),
+                'Bingo Full Gaming'
             ),
             subject: 'BFG - Datos de compra - ' . $this->serial_number,
             cc: [
-                new Address(
-                    'administrador@bingofullgaming.com'
-                )
+                new Address('administrador@bingofullgaming.com')
             ]
         );
     }
@@ -74,13 +70,23 @@ class BuyGameNotification extends Mailable
 
     /**
      * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
     public function attachments(): array
     {
         return [
-            Attachment::fromPath(storage_path('app/public/cards/' . $this->serial_number . '.png')),
+            Attachment::fromPath($this->card_path)
+                ->as('carton-bingo.webp')
+                ->withMime('image/webp'),
         ];
+    }
+
+    /**
+     * Limpiar archivos temporales al destruir
+     */
+    public function __destruct()
+    {
+        if (str_starts_with($this->card_path, sys_get_temp_dir())) {
+            @unlink($this->card_path);
+        }
     }
 }

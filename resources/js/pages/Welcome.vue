@@ -77,6 +77,7 @@ const generarCarton = (number = null) => {
 
         fetch(url, { method: 'get' })
             .then((response) => {
+                console.log(response);
                 // Primero verificar el estado de la respuesta
                 if (!response.ok) {
                     // Si hay error, parsear el cuerpo de la respuesta como JSON
@@ -107,10 +108,14 @@ const buyGame = async (carton, name, email, phone, referencia) => {
             phone,
             referencia,
             carton: {
-                numbers: carton.numbers, // Asume que carton.numbers tiene la estructura {B: [...], I: [...], ...}
+                card_path: carton.card,
+                filename: carton.filename,
                 serial: carton.serial,
                 game_id: selected_game.value,
                 amount: amountCard.value,
+                codeMark: carton.codeMark,
+                origin: carton.origin,
+                number: carton.number,
             },
         };
 
@@ -157,13 +162,13 @@ const processCardData = (data) => {
     carton.value = data;
     serialNumber.value = data.serial;
 
-    const originalNumbers = [data.numbers.B, data.numbers.I, data.numbers.N, data.numbers.G, data.numbers.O];
+    //const originalNumbers = [data.numbers.B, data.numbers.I, data.numbers.N, data.numbers.G, data.numbers.O];
 
-    cardNumbers.value = originalNumbers[0].map((_, colIndex) => originalNumbers.map((row) => row[colIndex]));
+    //cardNumbers.value = originalNumbers[0].map((_, colIndex) => originalNumbers.map((row) => row[colIndex]));
 
-    markedNumbers.value = Object.values(data.numbers)
-        .flat()
-        .filter((num) => num !== null);
+    //markedNumbers.value = Object.values(data.numbers)
+    //    .flat()
+    //    .filter((num) => num !== null);
 };
 
 const selected_game = ref(null);
@@ -324,7 +329,7 @@ onMounted(() => {
                         <div class="row">
                             <div class="col-lg-12">
                                 <h2>
-                                    Con 1 Cartón de 100Bs Participas por un Premio Total de
+                                    Con 1 Cartón de 80Bs Participas por un Premio Total de
                                     <b style="color: #f13d06">90000Bs</b>
                                 </h2>
                             </div>
@@ -340,10 +345,16 @@ onMounted(() => {
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
-                                            <img src="images/details-01.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px" />
+                                            <video style="border-radius: 23px; margin-bottom: 30px">
+                                                <source src="https://www.youtube.com/shorts/NtLefMCsiX0" type="video/mp4" />
+                                            </video>
+                                            <!-- <img src="images/details-01.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px" /> -->
                                         </div>
                                         <div class="col-lg-4">
-                                            <img src="images/details-02.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px" />
+                                            <video style="border-radius: 23px; margin-bottom: 30px">
+                                                <source src="https://www.youtube.com/watch?v=65DDs-XubUw" type="video/mp4" />
+                                            </video>
+                                            <!-- <img src="images/details-02.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px" /> -->
                                         </div>
                                         <div class="col-lg-4">
                                             <img src="images/details-03.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px" />
@@ -352,8 +363,8 @@ onMounted(() => {
                                             <ol>
                                                 <li>
                                                     <i style="color: #f13d06" class="fa-solid fa-circle-check"></i>
-                                                    Con 100Bs participas en
-                                                    <strong>todas las 14 rondas del día</strong>, eso quiere decir que tienes hasta 14 oportunidades
+                                                    Con 80Bs participas en
+                                                    <strong>todas las 12 rondas del día</strong>, eso quiere decir que tienes hasta 12 oportunidades
                                                     distintas de ganar.
                                                 </li>
                                                 <li class="mt-2">
@@ -364,12 +375,6 @@ onMounted(() => {
                                                 <li class="mt-2">
                                                     <i style="color: #f13d06" class="fa-solid fa-circle-check"></i>
                                                     Hacemos juegos todos los días a las 7pm de la noche.
-                                                </li>
-                                                <li class="mt-2">
-                                                    <i style="color: #f13d06" class="fa-solid fa-circle-check"></i>
-                                                    Tenemos meses jugando por lo que
-                                                    <strong><a href="#">tenemos varios testimonios de ganadores</a></strong
-                                                    >.
                                                 </li>
                                                 <li class="mt-2">
                                                     <i style="color: #f13d06" class="fa-solid fa-circle-check"></i>
@@ -506,8 +511,9 @@ onMounted(() => {
 
                     <div class="mb-12 mt-12" v-if="viewCarton">
                         <h3 class="mb-4 text-center text-lg font-semibold text-gray-900">Tu Cartón</h3>
-                        <div class="bingo-card mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow-md">
-                            <!-- Encabezado -->
+                        <img class="mx-auto max-w-sm" :src="carton.card" alt="" />
+                        <!-- <div class="bingo-card mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow-md">
+                          
                             <div class="grid grid-cols-5 bg-blue-600 py-2 text-center font-bold text-white">
                                 <span>B</span>
                                 <span>I</span>
@@ -516,7 +522,7 @@ onMounted(() => {
                                 <span>O</span>
                             </div>
 
-                            <!-- Números (filas) -->
+                        
                             <div
                                 v-for="(row, rowIndex) in cardNumbers"
                                 :key="rowIndex"
@@ -537,9 +543,8 @@ onMounted(() => {
                                 </div>
                             </div>
 
-                            <!-- Pie -->
                             <div class="bg-gray-100 px-4 py-2 text-center text-sm text-gray-600">Serial: {{ serialNumber }}</div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- STEP 1 -->
