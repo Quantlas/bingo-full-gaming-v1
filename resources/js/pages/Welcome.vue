@@ -330,7 +330,7 @@ onMounted(() => {
                             <div class="col-lg-12">
                                 <h2>
                                     Con 1 Cartón de 80Bs Participas por un Premio Total de
-                                    <b style="color: #f13d06">90000Bs</b>
+                                    <b style="color: #f13d06">48.000Bs</b>
                                 </h2>
                             </div>
                             <div class="col-lg-12">
