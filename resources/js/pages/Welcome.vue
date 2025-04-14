@@ -345,15 +345,29 @@ onMounted(() => {
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
-                                            <video style="border-radius: 23px; margin-bottom: 30px">
-                                                <source src="https://www.youtube.com/shorts/NtLefMCsiX0" type="video/mp4" />
-                                            </video>
+                                            <iframe
+                                                width="560"
+                                                height="315"
+                                                src="https://www.youtube.com/embed/65DDs-XubUw?si=pcwr0vDLs4ed8xlh&amp;controls=0"
+                                                title="YouTube video player"
+                                                frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                referrerpolicy="strict-origin-when-cross-origin"
+                                                allowfullscreen
+                                            ></iframe>
                                             <!-- <img src="images/details-01.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px" /> -->
                                         </div>
                                         <div class="col-lg-4">
-                                            <video style="border-radius: 23px; margin-bottom: 30px">
-                                                <source src="https://www.youtube.com/watch?v=65DDs-XubUw" type="video/mp4" />
-                                            </video>
+                                            <iframe
+                                                width="560"
+                                                height="315"
+                                                src="https://youtube.com/shorts/NtLefMCsiX0?si=Yn-OP0wN2iPH2S8P&amp;controls=0"
+                                                title="YouTube video player"
+                                                frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                referrerpolicy="strict-origin-when-cross-origin"
+                                                allowfullscreen
+                                            ></iframe>
                                             <!-- <img src="images/details-02.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px" /> -->
                                         </div>
                                         <div class="col-lg-4">
